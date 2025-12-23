@@ -518,18 +518,7 @@ This is the most common issue on Windows. FFmpeg is required for audio extractio
 - [ ] Video thumbnail extraction
 - [ ] Progress persistence (resume interrupted processing)
 
-## 📄 License
-
-MIT License - feel free to use this project for personal or commercial purposes.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
 ## 📧 Contact
 
-For questions or support, please open an issue on GitHub.
-
----
-
-**Built with ❤️ using Streamlit, FastAPI, and Ollama**
+For questions or support, please open an issue on GitHub or send mail on dass21656@gmail.com.
