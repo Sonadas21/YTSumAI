@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  ytsumai:
+    build: .
+    container_name: ytsumai
+    ports:
+      - "8501:8501" # Streamlit
+      - "8000:8000" # FastAPI (optional)
+    volumes:
+      - ./downloads:/app/downloads
+      - ./.env:/app/.env
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    network_mode: "host" # Access Ollama on host
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge

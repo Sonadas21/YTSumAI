@@ -1,0 +1,12 @@
+fastapi==0.109.0
+uvicorn[standard]==0.25.0
+streamlit==1.30.0
+yt-dlp==2024.3.10
+pydub==0.25.1
+requests==2.31.0
+pydantic==2.5.3
+python-multipart==0.0.6
+aiofiles==23.2.1
+python-dotenv==1.0.0
+openai-whisper==20250625
+gradio==4.44.0
