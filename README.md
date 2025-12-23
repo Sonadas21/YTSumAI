@@ -11,14 +11,15 @@ An end-to-end AI system that downloads YouTube videos, transcribes audio using o
 YTSumAI is a complete offline solution for YouTube video summarization that leverages:
 - **yt-dlp** for downloading YouTube audio
 - **OpenAI Whisper** (offline) for speech-to-text transcription
-- **Qwen 3.1** local LLM for intelligent summarization
-- **Streamlit** for a modern, interactive web interface
+- **Llama 3.1 8B** local LLM for intelligent summarization  
+- **Gradio** for a clean, modern web interface (recommended)
+- **Streamlit** as an alternative UI option
 - **FastAPI** for optional REST API access
 
 ### Key Features
 
 ✅ **100% Offline Processing** - No cloud APIs, complete data privacy  
-✅ **Modern Web UI** - Beautiful Streamlit interface with minimal professional design  
+✅ **Modern Web UI** - Clean Gradio interface with minimal design (or Streamlit alternative)  
 ✅ **Smart Chunking** - Handles videos of any length (tested up to 2+ hours)  
 ✅ **Speaker Diarization** - Optional speaker identification for multi-person content 🎙️ **NEW**  
 ✅ **REST API** - Optional FastAPI backend for programmatic access  
@@ -133,7 +134,15 @@ DOWNLOAD_DIR=./downloads
 
 ### 5. Run the Application
 
-#### Option A: Streamlit UI (Recommended)
+#### Option A: Gradio UI (Recommended ⭐)
+
+```bash
+python gradio_app.py
+```
+
+Then open your browser to: **http://localhost:7860**
+
+#### Option B: Streamlit UI
 
 ```bash
 streamlit run streamlit_app.py
@@ -141,7 +150,7 @@ streamlit run streamlit_app.py
 
 Then open your browser to: **http://localhost:8501**
 
-#### Option B: FastAPI Backend
+#### Option C: FastAPI Backend
 
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
@@ -156,7 +165,7 @@ API documentation available at: **http://localhost:8000/docs**
    ollama serve
    ```
 
-2. **Open the Streamlit UI** in your browser
+2. **Open the Gradio or Streamlit UI** in your browser
 
 3. **Enter a YouTube URL** and configure options:
    - Paste the video URL
