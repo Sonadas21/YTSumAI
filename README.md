@@ -4,7 +4,6 @@ An end-to-end AI system that downloads YouTube videos, transcribes audio using o
 
 ![Project Status](https://img.shields.io/badge/status-active-success)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ## 🎯 Overview
 
