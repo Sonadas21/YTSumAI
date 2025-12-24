@@ -49,17 +49,18 @@ class TextSummarizer:
         Returns:
             Summary text
         """
-        prompt = f"""You are an expert at summarizing video transcripts. Your task is to create a concise, well-structured summary.
+        prompt = f"""You are an expert content summarizer. Create a concise, well-structured summary of the following content.
 
-**Transcript:**
+**Content:**
 {text}
 
 **Instructions:**
 - Create a comprehensive summary in about {self.max_summary_length} words
-- Organize the summary with clear sections/bullet points if appropriate
+- Organize with clear sections or bullet points where appropriate
 - Capture the main topics, key points, and important details
-- Use clear, professional language
-- Focus on the content, not the video format
+- Use clear, professional language as if presenting the information naturally
+- Write as a cohesive summary, not a description of a video or transcript
+- Avoid phrases like "the speaker mentions" or "in this video" - present the information directly
 
 **Summary:**"""
 
@@ -114,7 +115,7 @@ class TextSummarizer:
         for i, chunk in enumerate(chunks, 1):
             print(f"Summarizing chunk {i}/{len(chunks)}...")
             
-            chunk_prompt = f"""Summarize the following section of a video transcript. Focus on key points:
+            chunk_prompt = f"""Summarize the following content section concisely, capturing the key points:
 
 {chunk}
 
@@ -135,11 +136,17 @@ Summary:"""
         # Combine chunk summaries into final summary
         combined = "\n\n".join(chunk_summaries)
         
-        final_prompt = f"""Create a final comprehensive summary from these section summaries of a video transcript:
+        final_prompt = f"""Synthesize these section summaries into a cohesive, comprehensive summary:
 
 {combined}
 
-Create a well-organized final summary in about {self.max_summary_length} words that captures all key points:"""
+**Instructions:**
+- Create a well-organized summary in about {self.max_summary_length} words
+- Present information naturally as if explaining the topic to someone
+- Avoid meta-references like "the video" or "the speaker"
+- Capture all key points in a clear, readable format
+
+**Final Summary:**"""
 
         payload = {
             "model": self.model,

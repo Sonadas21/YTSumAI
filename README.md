@@ -4,7 +4,6 @@ An end-to-end AI system that downloads YouTube videos, transcribes audio using o
 
 ![Project Status](https://img.shields.io/badge/status-active-success)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ## 🎯 Overview
 
@@ -397,6 +396,30 @@ YTSumAI/
 3. **Use smaller models** for faster inference (trade-off: lower quality)
 4. **Pre-download frequently used videos** to skip download step
 
+## 🧠 Challenges Faced
+
+### 1. Context Window Limitations & Chunking
+One of the primary challenges was **summarizing transcripts** from long YouTube videos (e.g., >1 hour) with the **Llama 3.1 8B** model, which has a limited context window. Passing the entire transcript at once would result in token overflow errors.
+
+**Solution:** Implemented a **Map-Reduce summarization strategy**:
+- **Map:** Split the transcript into manageable 4000-token chunks with overlap to preserve context.
+- **Reduce:** Summarize each chunk independently, then combine and refine these partial summaries into a final coherent output.
+
+### 2. Offline Dependency Management
+Ensuring a strictly offline experience while keeping setup easy was difficult, particularly with **FFmpeg** (for audio) and **Ollama** (for LLMs).
+
+**Solution:** 
+- Created detailed, OS-specific installation guides for FFmpeg.
+- Leveraged **Ollama's** self-contained architecture to handle model weights locally without complex Python environments (like PyTorch/Transformers) for the LLM part.
+- Used **Whisper's** automatic model downloading (on first run) to balance the "offline" requirement with initial ease of use.
+
+### 3. Balancing Inference Speed vs. Quality
+Running two heavy models (Whisper + Llama 3) locally on consumer hardware can be slow.
+
+**Solution:** 
+- Selected **Whisper `base`** model as the default: it offers the best speed-to-accuracy ratio for clear YouTube audio.
+- Used **4-bit quantized** Llama 3.1 models via Ollama to drastically reduce RAM usage and increase inference speed without significant quality loss compared to fp16 models.
+
 ## 🔧 API Usage
 
 ### Endpoints
@@ -518,18 +541,7 @@ This is the most common issue on Windows. FFmpeg is required for audio extractio
 - [ ] Video thumbnail extraction
 - [ ] Progress persistence (resume interrupted processing)
 
-## 📄 License
-
-MIT License - feel free to use this project for personal or commercial purposes.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
 ## 📧 Contact
 
-For questions or support, please open an issue on GitHub.
-
----
-
-**Built with ❤️ using Streamlit, FastAPI, and Ollama**
+For questions or support, please open an issue on GitHub or send mail on dass21656@gmail.com.
